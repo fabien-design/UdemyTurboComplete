@@ -19,8 +19,6 @@ fetch(url)
             }
         });
 
-        console.log(objectIds);
-
         objectIds.forEach(id => {
             fetch(`https://www.udemy.com/api-2.0/users/me/subscribed-courses/${courseId}/completed-lectures/`, {
                 headers: {
