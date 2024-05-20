@@ -13,7 +13,7 @@ Finish Udemy courses instantly with this JavaScript automation script.
 2. **Finding Course ID**
    - In the Network tab, locate an API request for your course, similar to this one: `https://www.udemy.com/api-2.0/courses/5591118/?`
    - The numerical value in the URL (e.g., `5591118`) is your course ID. Note it down.
-   ![Finding Course Screenshot]([https://via.placeholder.com/468x300?text=App+Screenshot+Here](https://github.com/fabien-design/UdemyTurboComplete/blob/master/Images/explication.png?raw=true))
+   ![Finding Course Screenshot](https://github.com/fabien-design/UdemyTurboComplete/blob/master/Images/explication.png?raw=true)
 
 3. **Running the Script**
    - Execute the script.
