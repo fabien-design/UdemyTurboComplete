@@ -1,8 +1,7 @@
-// Demande l'ID du cours à l'utilisateur
-const courseId = prompt('Veuillez entrer l\'ID du cours :');
+const courseId = prompt('Please enter the course ID:');
 
 const url = `https://www.udemy.com/api-2.0/courses/${courseId}/subscriber-curriculum-items/?page_size=200&fields[lecture]=title,id&fields[quiz]=title,id&fields[practice]=title,id&fields[chapter]=title,id`;
-
+// get all course steps ids 
 fetch(url)
     .then(response => {
         if (!response.ok) {
@@ -18,12 +17,12 @@ fetch(url)
                 objectIds.push(item.id);
             }
         });
-
-        objectIds.forEach(id => {
-            fetch(`https://www.udemy.com/api-2.0/users/me/subscribed-courses/${courseId}/completed-lectures/`, {
+        // send a POST request to complete each step
+        const requests = objectIds.map(id => {
+            return fetch(`https://www.udemy.com/api-2.0/users/me/subscribed-courses/${courseId}/completed-lectures/`, {
                 headers: {
                     "accept": "application/json, text/plain, */*",
-                    "accept-language": "fr-FR",
+                    "accept-language": "en-US",
                     "cache-control": "no-cache",
                     "content-type": "application/json",
                     "pragma": "no-cache",
@@ -49,6 +48,13 @@ fetch(url)
                 console.error(`There was a problem with the POST operation for lecture_id ${id}:`, postError);
             });
         });
+
+        // Wait for all requests to be resolved
+        return Promise.all(requests);
+    })
+    .then(() => {
+        // Once all requests are completed, display the alert
+        alert('All requests have been successfully sent!');
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
